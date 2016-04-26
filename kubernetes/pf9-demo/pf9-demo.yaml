@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: pf9-demo
+spec:
+  replicas: 6  
+  selector:
+    name: pf9
+    version: demo
+  template:
+    metadata:
+      labels:
+        name: pf9
+        version: demo
+    spec:
+      containers:
+      - image: pf9dockerhub/pf9-demo
+        name: demo
+        ports:
+        - containerPort: 80
+          protocol: TCP
