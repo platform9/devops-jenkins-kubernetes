@@ -1,0 +1,34 @@
+#Clone repo
+git clone https://github.com/platform9/devops-jenkins-kubernetes.git
+#cd to repo directory
+cd devops-jenkins-kubernetes
+#Deploy pf9-demo replication controller
+kubectl create -f kubernetes/pf9-demo/pf9-demo.yaml
+#Launch pf9-demo proxy host
+kubectl proxy --www=local/ &
+#Browse to webpage
+http://localhost:8001/static/
+#Deploy Jenkins master replication controller
+kubectl create -f kubernetes/pf9-jenkins/jenkins-master.yaml
+#Deploy Jenkins slave replication controller
+kubectl create -f kubernetes/pf9-jenkins-slave/jenkins-slave.yaml
+#Show kubernetes pods
+kubectl get pods
+#Execute bash terminal on Jenkins-slave pod
+kubectl exec -p [podname] -it -- bash
+#login to dockerhub
+docker login
+#provide prompt answers
+pf9dockerhub
+[password] - standard
+jeremy@platform9.com
+#Deploy Jenkins service
+kubectl create -f kubernetes/pf9-jenkins/service-jenkins.yaml
+#Show kubernetes services
+kubectl get services
+
+#Open Jenkins in web browswer
+#Record IP from the show services command and use that :8080 to navigate to Jenkins website
+#jenkins will autorun the build and doing a rolling upgrade
+
+#change html/data.json kitten->nautilus or nautilus->kitten
