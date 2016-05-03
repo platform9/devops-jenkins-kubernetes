@@ -33,7 +33,7 @@ var updateServer = function($http, server) {
     .success(function(data) {
       console.log(data);
       server.labels = data.metadata.labels;
-      server.host = data.status.hostIP.split('.')[0];
+      server.host = data.status.hostIP //.split('.')[0];
       server.status = data.status.phase;
       server.dockerImage = data.status.containerStatuses[0].image;
       updateImage($http, server);
