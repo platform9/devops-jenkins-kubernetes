@@ -27,6 +27,7 @@ spec:
     spec:
       containers:
       - image: pf9dockerhub/pf9-demo
+        imagePullPolicy: Always
         name: demo
         ports:
         - containerPort: 80
