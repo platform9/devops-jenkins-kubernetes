@@ -30,3 +30,4 @@ spec:
   selector:
     name: jenkins
     role: master
+  type: NodePort
