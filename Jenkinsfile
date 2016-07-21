@@ -9,7 +9,7 @@ docker.withRegistry('', 'docker-registry-login'){
 
 stage 'Deploy to cluster'
   //Set Kubernetes config
-  sh("kubectl config set-credentials jenkins-build --token=/var/run/secrets/kubernetes.io/serviceaccount/token")
+  sh("kubectl config set-credentials jenkins-build --token=`cat /var/run/secrets/kubernetes.io/serviceaccount/token`")
   sh("kubectl config set-cluster internal1 --server=https://kubernetes --certificate-authority=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt")
   sh("kubectl config set-context default --user=jenkins-build --namespace=`cat /var/run/secrets/kubernetes.io/serviceaccount/namespace`  --cluster=internal1")
   sh("kubectl config use-context default")
